@@ -54,13 +54,14 @@ for i, value in enumerate(tabulka_lis):
 
 lst = [[x.tipo_imovel,x.nome_imovel,x.valor_imovel,x.cidade_imovel, x.dormitorios, x.banheiros, x.vagas] for x in lista_de_imoveis]
 
-df = pd.DataFrame(lst, columns=["tipo_imovel", "nome_imovel", "valor_imovel", "cidade_imovel", "dormitorios","banheiros", "vagas"])
+columns = ["tipo_imovel", "nome_imovel", "valor_imovel", "cidade_imovel", "dormitorios","banheiros", "vagas"]
+df = pd.DataFrame(lst)
 df.to_csv('my_file.csv', index=False, header=False)
 
 DATA_URL = ('my_file.csv')
 
 def load_data(nrows):
-    data = pd.read_csv(DATA_URL)
+    data = pd.read_csv(DATA_URL, names=columns)
     lowercase = lambda x: str(x).lower()
     data.rename(lowercase, axis='columns', inplace=True)
     return data
